@@ -1,0 +1,11 @@
+*
+!.gitignore
+!.travis.yml
+!README.md
+!*.cpp
+!*.h
+!*.h.in
+!*.hpp
+!*.tsv
+!CMakeLists.txt
+version.h
