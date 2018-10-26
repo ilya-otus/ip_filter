@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE ip_filter_test_module
+#define BOOST_TEST_MODULE ip_filter_test_versions_module
 #include "lib.h"
 #include <boost/test/unit_test.hpp>
 

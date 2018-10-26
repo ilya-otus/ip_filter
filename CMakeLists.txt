@@ -18,21 +18,32 @@ add_executable(ip_filter main.cpp)
 add_library(ipfilter 
     lib.cpp
     ip_item.cpp
+    ip_pool.cpp
 )
 add_executable(test_version test_version.cpp)
-set_target_properties(ip_filter ipfilter test_version PROPERTIES
+add_executable(test_item test_ip_item.cpp)
+add_executable(test_pool test_ip_pool.cpp)
+set_target_properties(ip_filter ipfilter test_version test_item test_pool PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
-set_target_properties(test_version PROPERTIES
+set_target_properties(test_version test_item test_pool PROPERTIES
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 target_link_libraries(ip_filter
     ipfilter
 )
+target_link_libraries(test_item
+    ${Boost_LIBRARIES}
+    ipfilter
+)
 target_link_libraries(test_version
+    ${Boost_LIBRARIES}
+    ipfilter
+)
+target_link_libraries(test_pool
     ${Boost_LIBRARIES}
     ipfilter
 )
@@ -44,4 +55,6 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 set(CPACK_PACKAGE_CONTACT podshivalov.ilya@yandex.ru)
 include(CPack)
 enable_testing()
-add_test(ipfilter_tests test_version)
+add_test(ipfilter_tests_version test_version)
+add_test(ipfilter_tests_item test_item)
+add_test(ipfilter_tests_pool test_pool)
