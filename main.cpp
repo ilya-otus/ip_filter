@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
     auto ipPool = ip_filter::IpPool();
     std::cin >> ipPool;
     ipPool.rsort();
-    std::cout << ipPool << std::endl;
-    std::cout << ipPool.filter(1) << std::endl;
-    std::cout << ipPool.filter(46, 70) << std::endl;
-    std::cout << ipPool.filter_any(46) << std::endl;
+    std::cout << ipPool;
+    std::cout << ipPool.filter(1);
+    std::cout << ipPool.filter(46, 70);
+    std::cout << ipPool.filter_any(46);
     return 0;
 }
