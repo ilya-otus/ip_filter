@@ -3,8 +3,6 @@
 #include <boost/test/unit_test.hpp>
 #include <string>
 
-using namespace std::string_literals;
-
 BOOST_AUTO_TEST_SUITE(ip_filter_test_suite)
 
 auto stringifyItem(const ip_filter::IpItem &item) -> std::string {
@@ -13,7 +11,7 @@ auto stringifyItem(const ip_filter::IpItem &item) -> std::string {
             field != item.fields().end();
             ++field) {
         if (field != item.fields().begin()) {
-            result += "."s;
+            result += ".";
         }
         result += *field;
     }
@@ -22,18 +20,18 @@ auto stringifyItem(const ip_filter::IpItem &item) -> std::string {
 
 BOOST_AUTO_TEST_CASE(ip_pool_sort_test) {
     std::vector<std::string> orderedData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "3.4.6.8"s,
-            "2.5.7.9"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "3.4.6.8",
+            "2.5.7.9",
+            "1.3.5.7",
             });
     std::vector<std::string> unorderedData({
-            "2.5.7.9"s,
-            "3.4.6.8"s,
-            "1.3.5.7"s,
-            "9.7.5.2"s,
-            "8.6.4.3"s,
+            "2.5.7.9",
+            "3.4.6.8",
+            "1.3.5.7",
+            "9.7.5.2",
+            "8.6.4.3",
             });
     ip_filter::IpPool pool(std::move(unorderedData));
     BOOST_CHECK(!pool.items().empty());
@@ -48,23 +46,23 @@ BOOST_AUTO_TEST_CASE(ip_pool_sort_test) {
 
 BOOST_AUTO_TEST_CASE(ip_pool_filter_1_test) {
     std::vector<std::string> testData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "8.1.4.3"s,
-            "3.4.6.8"s,
-            "3.4.1.8"s,
-            "2.5.7.9"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "8.1.4.3",
+            "3.4.6.8",
+            "3.4.1.8",
+            "2.5.7.9",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     std::vector<std::string> testResult({
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     auto size = testData.size();
     ip_filter::IpPool pool(std::move(testData));
@@ -80,22 +78,22 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_1_test) {
 
 BOOST_AUTO_TEST_CASE(ip_pool_filter_2_test) {
     std::vector<std::string> testData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "8.1.4.3"s,
-            "3.4.6.8"s,
-            "3.4.1.8"s,
-            "2.5.7.9"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "8.1.4.3",
+            "3.4.6.8",
+            "3.4.1.8",
+            "2.5.7.9",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     std::vector<std::string> testResult({
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
             });
     auto size = testData.size();
     ip_filter::IpPool pool(std::move(testData));
@@ -111,21 +109,21 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_2_test) {
 
 BOOST_AUTO_TEST_CASE(ip_pool_filter_3_test) {
     std::vector<std::string> testData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "8.1.4.3"s,
-            "3.4.6.8"s,
-            "3.4.1.8"s,
-            "2.5.7.9"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "8.1.4.3",
+            "3.4.6.8",
+            "3.4.1.8",
+            "2.5.7.9",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     std::vector<std::string> testResult({
-            "1.1.1.1"s,
-            "1.1.1.7"s,
+            "1.1.1.1",
+            "1.1.1.7",
             });
     auto size = testData.size();
     ip_filter::IpPool pool(std::move(testData));
@@ -141,20 +139,20 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_3_test) {
 
 BOOST_AUTO_TEST_CASE(ip_pool_filter_4_test) {
     std::vector<std::string> testData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "8.1.4.3"s,
-            "3.4.6.8"s,
-            "3.4.1.8"s,
-            "2.5.7.9"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "8.1.4.3",
+            "3.4.6.8",
+            "3.4.1.8",
+            "2.5.7.9",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     std::vector<std::string> testResult({
-            "1.1.1.1"s,
+            "1.1.1.1",
             });
     auto size = testData.size();
     ip_filter::IpPool pool(std::move(testData));
@@ -170,26 +168,26 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_4_test) {
 
 BOOST_AUTO_TEST_CASE(ip_pool_filter_any_test) {
     std::vector<std::string> testData({
-            "9.7.5.2"s,
-            "8.6.4.3"s,
-            "8.1.4.3"s,
-            "3.4.6.8"s,
-            "3.4.1.8"s,
-            "2.5.7.9"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "9.7.5.2",
+            "8.6.4.3",
+            "8.1.4.3",
+            "3.4.6.8",
+            "3.4.1.8",
+            "2.5.7.9",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     std::vector<std::string> testResult({
-            "8.1.4.3"s,
-            "3.4.1.8"s,
-            "2.5.7.1"s,
-            "1.1.1.1"s,
-            "1.1.1.7"s,
-            "1.1.5.7"s,
-            "1.3.5.7"s,
+            "8.1.4.3",
+            "3.4.1.8",
+            "2.5.7.1",
+            "1.1.1.1",
+            "1.1.1.7",
+            "1.1.5.7",
+            "1.3.5.7",
             });
     auto size = testData.size();
     ip_filter::IpPool pool(std::move(testData));

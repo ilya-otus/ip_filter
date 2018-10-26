@@ -5,7 +5,6 @@ namespace ip_filter {
 namespace {
 const auto defaultFieldDelimiter = '\t';
 const auto defaultIpDelimiter = '.';
-const auto ipSize = 4;
 } // namespace
 
 std::vector<std::string> split(const std::string &str, char delimiter) {
