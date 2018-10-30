@@ -24,24 +24,9 @@ BOOST_AUTO_TEST_CASE(ip_item_test) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(ip_item_comparison_test) {
-    ip_filter::IpItem item1("1.1.1.2\t1\t2");
-    ip_filter::IpItem item2("1.1.1.1\t2\t1");
-    BOOST_CHECK(item1 > item2);
-    BOOST_CHECK(!(item1 < item2));
-    BOOST_CHECK(item1.size() == item2.size());
-}
-
-BOOST_AUTO_TEST_CASE(ip_item_equality_test) {
-    ip_filter::IpItem item1("1.1.1.1\t1\t2");
-    ip_filter::IpItem item2("1.1.1.1\t2\t1");
-    BOOST_CHECK(!(item1 > item2));
-    BOOST_CHECK(!(item1 < item2));
-}
-
 BOOST_AUTO_TEST_CASE(ip_item_parsing_test) {
     ip_filter::IpItem item("1.2.3.4\t1\t2");
-    std::vector<std::string> rawItem({"1","2","3","4"});
+    std::vector<int> rawItem({1,2,3,4});
     BOOST_CHECK_EQUAL(item.size(), rawItem.size());
     for (size_t i = 0; i < item.size(); ++i) {
         BOOST_CHECK(item.fields()[i] == rawItem[i]);

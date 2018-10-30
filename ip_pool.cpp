@@ -33,7 +33,10 @@ std::ostream& operator<<(std::ostream &os, const IpPool &pool) {
 
 void IpPool::rsort() {
     std::sort(mIpPool.begin(), mIpPool.end(), [] (const IpItem &item1, const IpItem &item2) {
-        return item1 > item2;
+        return std::lexicographical_compare(item1.fields().cbegin(), item1.fields().cend(),
+                item2.fields().cbegin(), item2.fields().cend(), [](int field1, int field2) {
+                    return field1 > field2;
+                });
     });
 }
 

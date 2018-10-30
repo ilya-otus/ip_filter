@@ -11,8 +11,8 @@ template <typename ... Args>
 std::vector<IpItem> _filter(const std::vector<IpItem> &pool, Args ... args) {
     if (pool.size() == 0)
         return {};
-    auto filterPredicate = [&] (const std::string &item, int pos) {
-        std::array<std::string, sizeof...(args)> filterValues = {(std::to_string(args))...};
+    auto filterPredicate = [&] (int item, int pos) {
+        std::array<int, sizeof...(args)> filterValues = {(args)...};
         return filterValues[pos] == item;
     };
 
@@ -39,8 +39,8 @@ template <typename T>
 std::vector<IpItem> _filter_any(const std::vector<IpItem> &pool, T t) {
     if (pool.size() == 0)
         return {};
-    auto filterAnyPredicate = [&] (const std::string &item) {
-        return std::to_string(t) == item;
+    auto filterAnyPredicate = [&] (int item) {
+        return t == item;
     };
 
     std::vector<IpItem> result;
