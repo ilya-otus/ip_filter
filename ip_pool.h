@@ -37,27 +37,6 @@ std::vector<IpItem> _filter(const std::vector<IpItem> &pool, Args ... args) {
     return result;
 }
 
-template <typename T>
-std::vector<IpItem> _filter_any(const std::vector<IpItem> &pool, T t) {
-    if (pool.size() == 0)
-        return {};
-    auto filterAnyPredicate = [&] (int item) {
-        return t == item;
-    };
-
-    std::vector<IpItem> result;
-    for (const auto &item : pool) {
-        bool match = false;
-        for (size_t i = 0; i < item.size(); ++i) {
-            match = match || filterAnyPredicate(item[i]);
-        }
-        if (match) {
-            result.emplace_back(item);
-        }
-    }
-    return result;
-}
-
 class IpPool {
 public:
     IpPool() = default;
@@ -73,7 +52,13 @@ public:
 
     template <typename T>
     IpPool filter_any(T t) {
-        return _filter_any(mIpPool, t);
+        decltype(mIpPool) result;
+        std::copy_if(mIpPool.begin(), mIpPool.end(), std::back_inserter(result), [&t](const IpItem &item) {
+                return std::any_of(item.begin(), item.end(), [&t](int field) {
+                        return field == t;
+                        });
+                });
+        return result;
     }
 
     void rsort();
