@@ -7,10 +7,10 @@ BOOST_AUTO_TEST_SUITE(ip_filter_test_suite)
 
 auto stringifyItem(const ip_filter::IpItem &item) -> std::string {
     std::string result;
-    for (auto field = item.fields().begin();
-            field != item.fields().end();
+    for (auto field = item.begin();
+            field != item.end();
             ++field) {
-        if (field != item.fields().begin()) {
+        if (field != item.begin()) {
             result += ".";
         }
         result += std::to_string(*field);
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_sort_test) {
     BOOST_CHECK(!pool.items().empty());
     BOOST_CHECK_EQUAL(pool.items().size(), orderedData.size());
     for (size_t i = 0; i < pool.items().size(); ++i) {
-        BOOST_CHECK(std::equal(orderedData[i].begin(), orderedData[i].end(), pool.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(orderedData[i].begin(), orderedData[i].end(), pool.items().at(i).begin()));
     }
 }
 
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_1_test) {
     BOOST_CHECK(!result.items().empty());
     BOOST_CHECK_EQUAL(result.items().size(), testResult.size());
     for (size_t i = 0; i < result.items().size(); ++i) {
-        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).begin()));
     }
 }
 
@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_2_test) {
     BOOST_CHECK(!result.items().empty());
     BOOST_CHECK_EQUAL(result.items().size(), testResult.size());
     for (size_t i = 0; i < result.items().size(); ++i) {
-        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).begin()));
     }
 }
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_3_test) {
     BOOST_CHECK(!result.items().empty());
     BOOST_CHECK_EQUAL(result.items().size(), testResult.size());
     for (size_t i = 0; i < result.items().size(); ++i) {
-        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).begin()));
     }
 }
 
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_4_test) {
     BOOST_CHECK(!result.items().empty());
     BOOST_CHECK_EQUAL(result.items().size(), testResult.size());
     for (size_t i = 0; i < result.items().size(); ++i) {
-        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).begin()));
     }
 }
 
@@ -197,7 +197,7 @@ BOOST_AUTO_TEST_CASE(ip_pool_filter_any_test) {
     BOOST_CHECK(!result.items().empty());
     BOOST_CHECK_EQUAL(result.items().size(), testResult.size());
     for (size_t i = 0; i < result.items().size(); ++i) {
-        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).fields().begin()));
+        BOOST_CHECK(std::equal(testResult[i].begin(), testResult[i].end(), result.items().at(i).begin()));
     }
 }
 

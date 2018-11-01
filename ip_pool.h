@@ -4,9 +4,11 @@
 #include <algorithm>
 #include <iostream>
 #include <array>
-#include "ip_item.h"
 
 namespace ip_filter {
+
+using IpItem = std::vector<int>;
+
 template <typename ... Args>
 std::vector<IpItem> _filter(const std::vector<IpItem> &pool, Args ... args) {
     if (pool.size() == 0)
@@ -21,11 +23,11 @@ std::vector<IpItem> _filter(const std::vector<IpItem> &pool, Args ... args) {
         bool match = true;
         if (sizeof...(args) > item.size()) {
             for (size_t i = 0; i < item.size(); ++i) {
-                match = match && filterPredicate(item.fields()[i], i);
+                match = match && filterPredicate(item[i], i);
             }
         } else {
             for (size_t i = 0; i < sizeof...(args); ++i) {
-                match = match && filterPredicate(item.fields()[i], i);
+                match = match && filterPredicate(item[i], i);
             }
         }
         if (match) {
@@ -47,7 +49,7 @@ std::vector<IpItem> _filter_any(const std::vector<IpItem> &pool, T t) {
     for (const auto &item : pool) {
         bool match = false;
         for (size_t i = 0; i < item.size(); ++i) {
-            match = match || filterAnyPredicate(item.fields()[i]);
+            match = match || filterAnyPredicate(item[i]);
         }
         if (match) {
             result.emplace_back(item);
@@ -81,4 +83,5 @@ private:
 };
 std::istream& operator>>(std::istream &is, IpPool &pool);
 std::ostream& operator<<(std::ostream &os, const IpPool &pool);
+std::ostream& operator<<(std::ostream &os, const IpItem &item);
 } // namespace ip_filter
