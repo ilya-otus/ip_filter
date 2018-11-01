@@ -48,6 +48,16 @@ IpPool::IpPool(std::vector<std::string> &&rawPool) {
     }
 }
 
+IpPool IpPool::filter_any(int f) const {
+    decltype(mIpPool) result;
+    std::copy_if(mIpPool.begin(), mIpPool.end(), std::back_inserter(result), [&f](const IpItem &item) {
+            return std::any_of(item.begin(), item.end(), [&f](int field) {
+                    return field == f;
+                    });
+            });
+    return result;
+}
+
 void IpPool::rsort() {
     std::sort(mIpPool.begin(), mIpPool.end(), std::greater<IpItem>());
 }
